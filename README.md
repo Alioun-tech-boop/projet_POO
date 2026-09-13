@@ -42,8 +42,11 @@ Moussa prend un ticket pour un retrait → ticket 2
 Affichage de la file :
 
 Ticket : 1 ; Client : Ali ; Opération : Dépôt
+
 Ticket : 2 ; Client : Moussa ; Opération : Retrait
+
 Le guichet appelle le ticket 1
 L'opération est terminée
+
 Le guichet appelle automatiquement le ticket 2
 L'opération est terminée
