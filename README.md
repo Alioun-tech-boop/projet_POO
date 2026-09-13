@@ -1,29 +1,35 @@
 Structure finale du projet
 
 ProjetBanque/
-│
+
 ├── Client.java
-│
+
 ├── Ticket.java
-│      ├── Depot
-│      ├── Retrait
-│      └── Virement
-│
+     ├── Depot
+     ├── Retrait
+     └── Virement
+
 ├── Guichet.java
-│
+
 └── Main.java
 
 Les concepts de POO visibles
 
 Classe	Client, Ticket, Guichet
+
 Objet	new Client(...), new Guichet(...)
+
 Constructeur	Dans chaque classe
+
 Encapsulation	Attributs private
+
 Héritage	Depot extends Ticket
 Héritage	Retrait extends Ticket
 Héritage	Virement extends Ticket
+
 Polymorphisme	Ticket ticket = new Depot(...)
 Redéfinition	@Override getTypeOperation()
+
 Classe abstraite	abstract class Ticket
 Composition	Guichet contient des Ticket
 Collection	Queue<Ticket>
