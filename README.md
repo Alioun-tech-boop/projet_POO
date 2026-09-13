@@ -1,3 +1,5 @@
+Groupe 6
+
 Structure finale du projet
 
 ProjetBanque/
