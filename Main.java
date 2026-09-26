@@ -12,15 +12,15 @@ public class Main {
     public static void main(String[] args) {
 
         System.out.println();
-        System.out.println("====================================================");
+        
         System.out.println("       GESTION DE TICKETS D'UNE BANQUE");
-        System.out.println("====================================================");
+       
 
         // 1. SCENARIO NORMAL
     
         System.out.println();
         System.out.println("[1] SCENARIO NORMAL");
-        System.out.println("----------------------------------------------------");
+        
 
         TicketStandard ticket1 =  new TicketStandard(1, "Retrait");
 
@@ -50,7 +50,7 @@ public class Main {
         
         System.out.println();
         System.out.println("[2] SCENARIO DE REFUS");
-        System.out.println("----------------------------------------------------");
+        
 
         TicketPrioritaire ticket2 = new TicketPrioritaire(2, "Dépôt");
 
@@ -72,7 +72,7 @@ public class Main {
         
         System.out.println();
         System.out.println("[3] CHANGEMENT D'ETAT");
-        System.out.println("----------------------------------------------------");
+       
 
         TicketStandard ticket3 = new TicketStandard(3, "Consultation");
 
@@ -92,11 +92,11 @@ public class Main {
         );
 
 // 4. POLYMORPHISME
-        // ==================================================
+        
 
         System.out.println();
         System.out.println("[4] POLYMORPHISME");
-        System.out.println("----------------------------------------------------");
+        
 
         Ticket ticket4 =
                 new TicketStandard(4, "Retrait");
@@ -128,7 +128,7 @@ public class Main {
         
         System.out.println();
         System.out.println("[5] UTILISATION DE L'INTERFACE");
-        System.out.println("----------------------------------------------------");
+        
 
         GestionTicket gestion1 = new TicketStandard(6, "Retrait");
 
@@ -148,9 +148,9 @@ public class Main {
         // FIN
     
         System.out.println();
-        System.out.println("====================================================");
+        
         System.out.println("                 TESTS TERMINÉS");
-        System.out.println("====================================================");
+      
     }
 }
        
