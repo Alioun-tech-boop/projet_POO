@@ -150,6 +150,8 @@ GestionTicketBanque/
 │   ├── TicketPrioritaire.java
 │   ├── GestionTicket.java
 │   └── Main.java
+├──docs/
+│   └── diagramme-uml.jpeg
 │
-├── README.md
-└── schema.puml
+└──README.md
+
