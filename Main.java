@@ -91,5 +91,66 @@ public class Main {
                 ticket3.getEtat().equals("TRAITE")
         );
 
+// 4. POLYMORPHISME
+        // ==================================================
 
+        System.out.println();
+        System.out.println("[4] POLYMORPHISME");
+        System.out.println("----------------------------------------------------");
+
+        Ticket ticket4 =
+                new TicketStandard(4, "Retrait");
+
+        Ticket ticket5 =
+                new TicketPrioritaire(5, "Virement");
+
+        int priorite4 = ticket4.calculerPriorite();
+        int priorite5 = ticket5.calculerPriorite();
+
+        System.out.println(
+                "Ticket n°" + ticket4.getNumero()
+                        + " (TicketStandard) : priorité = "
+                        + priorite4
+        );
+
+        System.out.println(
+                "Ticket n°" + ticket5.getNumero()
+                        + " (TicketPrioritaire) : priorité = "
+                        + priorite5
+        );
+
+        afficherResultat(
+                "Le polymorphisme fonctionne",
+                priorite4 == 1 && priorite5 == 2
+        );
+
+        // 5. UTILISATION DE L'INTERFACE
+        
+        System.out.println();
+        System.out.println("[5] UTILISATION DE L'INTERFACE");
+        System.out.println("----------------------------------------------------");
+
+        GestionTicket gestion1 = new TicketStandard(6, "Retrait");
+
+        GestionTicket gestion2 = new TicketPrioritaire(7, "Dépôt");
+
+        gestion1.appeler();
+        boolean resultatGestion1 = gestion1.traiter();
+
+        gestion2.appeler();
+        boolean resultatGestion2 = gestion2.traiter();
+
+        afficherResultat(
+                "L'interface GestionTicket est correctement utilisée",
+                resultatGestion1 && resultatGestion2
+        );
+
+        // FIN
+    
+        System.out.println();
+        System.out.println("====================================================");
+        System.out.println("                 TESTS TERMINÉS");
+        System.out.println("====================================================");
+    }
+}
        
