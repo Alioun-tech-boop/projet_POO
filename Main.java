@@ -1,129 +1,86 @@
-import java.util.Scanner;
-
 public class Main {
 
     public static void main(String[] args) {
 
-        try (Scanner scanner = new Scanner(System.in)) {
+        System.out.println("===== GESTION DES TICKETS D'UNE BANQUE =====\n");
 
-        // Création des clients
-        Client client1 = new Client(1, "Ali");
-        Client client2 = new Client(2, "Moussa");
-        Client client3 = new Client(3, "Awa");
+        // 1. SCENARIO NORMAL
 
-        // Création du guichet
-        Guichet guichet = new Guichet(1);
+        System.out.println("----- 1. SCENARIO NORMAL -----");
 
-        int prochainNumeroTicket = 1;
-        int choix;
+        TicketStandard ticket1 = new TicketStandard(1, "Retrait");
 
-        do {
-            System.out.println("       BANQUE - GUICHET");
-            System.out.println("1. Créer un ticket");
-            System.out.println("2. Appeler le prochain client");
-            System.out.println("3. Terminer l'opération");
-            System.out.println("4. Afficher la file d'attente");
-            System.out.println("5. Afficher l'état du guichet");
-            System.out.println("0. Quitter");
+        ticket1.afficherInformations();
 
-            System.out.print("\nVotre choix : ");
-            choix = scanner.nextInt();
+        System.out.println();
 
-            switch (choix) {
+        ticket1.appeler();
+        ticket1.traiter();
 
-                case 1 -> {
-                    System.out.println("\n Choisir le client ");
-                    System.out.println("1. Ali");
-                    System.out.println("2. Moussa");
-                    System.out.println("3. Awa");
+        System.out.println("État final : " + ticket1.getEtat());
 
-                    System.out.print("Votre choix : ");
-                    int choixClient = scanner.nextInt();
+        // 2. REFUS
+        
+        System.out.println("\n----- 2. SCENARIO DE REFUS -----");
 
-                    Client client = switch (choixClient) {
-                        case 1 -> client1;
-                        case 2 -> client2;
-                        case 3 -> client3;
-                        default -> null;
-                    };
+        TicketPrioritaire ticket2 =  new TicketPrioritaire(2, "Dépôt");
 
-                    if (client == null) {
-                        System.out.println("Client invalide.");
-                        break;
-                    }
-                    System.out.println("\n Type d'opération ");
-                    System.out.println("1. Dépôt");
-                    System.out.println("2. Retrait");
-                    System.out.println("3. Virement");
+        ticket2.afficherInformations();
 
-                    System.out.print("Votre choix : ");
-                    int choixOperation = scanner.nextInt();
+        System.out.println();
 
-                    Ticket ticket = switch (choixOperation) {
-                        case 1 -> new Depot(
-                            prochainNumeroTicket,
-                            client
-                        );
-                        case 2 -> new Retrait(
-                            prochainNumeroTicket,
-                            client
-                        );
-                        case 3 -> new Virement(
-                            prochainNumeroTicket,
-                            client
-                        );
-                        default -> null;
-                    };
+        // Tentative de traitement alors que le ticket
+        // est encore EN_ATTENTE
+        boolean resultat = ticket2.traiter();
 
-                    if (ticket == null) {
-                        System.out.println(
-                            "Opération invalide."
-                        );
-                        break;
-                    }
+        System.out.println("Résultat du traitement : " + resultat);
+        System.out.println("État du ticket : " + ticket2.getEtat());
 
-                    guichet.ajouterTicket(ticket);
+        // 3. CHANGEMENT D'ETAT
+        
+        System.out.println("\n----- 3. CHANGEMENT D'ETAT -----");
 
-                    System.out.println(
-                        "Votre numéro de ticket est : " +
-                        prochainNumeroTicket
-                    );
+        TicketStandard ticket3 =  new TicketStandard(3, "Consultation");
 
-                    prochainNumeroTicket++;
+        System.out.println("État initial : " + ticket3.getEtat());
 
-                }
+        ticket3.appeler();
 
-                case 2 ->
+        System.out.println("Après appel : " + ticket3.getEtat());
 
-                    guichet.appelerProchainClient();
+        ticket3.traiter();
 
-                case 3 ->
+        System.out.println("Après traitement : " + ticket3.getEtat());
 
-                    guichet.terminerOperation();
+        // 4. POLYMORPHISME
+        
+        System.out.println("\n----- 4. POLYMORPHISME -----");
 
-                case 4 ->
+        Ticket ticket4 = new TicketStandard(4, "Retrait");
 
-                    guichet.afficherFileAttente();
+        Ticket ticket5 = new TicketPrioritaire(5, "Virement");
 
-                case 5 ->
+        System.out.println("Ticket n°" + ticket4.getNumero()
+                + " : priorité = " + ticket4.calculerPriorite());
 
-                    guichet.afficherEtat();
+        System.out.println("Ticket n°" + ticket5.getNumero()
+                + " : priorité = " + ticket5.calculerPriorite());
 
-                case 0 ->
+        // 5. UTILISATION DE L'INTERFACE
+        
+        System.out.println("\n----- 5. UTILISATION DE L'INTERFACE -----");
 
-                    System.out.println(
-                        "Merci d'avoir utilisé le système."
-                    );
+        GestionTicket gestion1 =  new TicketStandard(6, "Retrait");
 
-                default ->
+        GestionTicket gestion2 =  new TicketPrioritaire(7, "Dépôt");
 
-                    System.out.println(
-                        "Choix invalide."
-                    );
-            }
+        gestion1.appeler();
+        gestion1.traiter();
 
-        } while (choix != 0);
+        gestion2.appeler();
+        gestion2.traiter();
 
-        }
+
+        System.out.println("\n===== FIN DES TESTS =====");
     }
 }
