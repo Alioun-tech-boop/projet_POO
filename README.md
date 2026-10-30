@@ -155,3 +155,86 @@ GestionTicketBanque/
 │
 └──README.md
 
+## Tests manuels — Jalon 1
+
+### Objectif des tests
+
+Les tests du jalon 1 visent à vérifier le fonctionnement des principales fonctionnalités de l'application de gestion des tickets bancaires, ainsi que l'utilisation des concepts fondamentaux de la programmation orientée objet en Java.
+
+### Tableau des tests
+
+| N° | Test effectué | Résultat attendu | Statut attendu |
+|---|---|---|---|
+| 1 | Scénario normal : appel et traitement d'un ticket standard | EN_ATTENTE → APPELE → TRAITE | SUCCÈS |
+| 2 | Tentative de traitement d'un ticket prioritaire sans appel préalable | Traitement refusé (`false`), état EN_ATTENTE | SUCCÈS |
+| 3 | Vérification des changements d'état d'un ticket | État final TRAITE | SUCCÈS |
+| 4 | Vérification du polymorphisme avec les deux types de tickets | Priorités 1 et 2 | SUCCÈS |
+| 5 | Utilisation de l'interface GestionTicket | Appel et traitement réussis pour les deux types | SUCCÈS |
+
+### Bilan attendu des tests
+
+========================================
+        BILAN DES TESTS - JALON 1
+========================================
+Nombre total de tests : 5
+Tests réussis         : 5
+Tests échoués         : 0
+Taux de réussite      : 100 %
+
+========================================
+
+### Conclusion
+
+Les cinq scénarios de tests du jalon 1 permettent de vérifier :
+
+- La création et l'initialisation des tickets.
+- Le passage entre les états EN_ATTENTE, APPELE et TRAITE.
+- Le refus du traitement d'un ticket non appelé.
+- Le polymorphisme entre TicketStandard et TicketPrioritaire.
+- L'utilisation de l'interface GestionTicket.
+
+## Tests manuels — Jalon 2
+
+### Objectif des tests
+
+Les tests ont pour objectif de vérifier le fonctionnement de l'application, le respect des invariants et l'utilisation des concepts de programmation orientée objet : héritage, abstraction, interfaces et polymorphisme.
+
+### Tableau des tests
+
+| N° | Test effectué | Résultat attendu | Statut attendu |
+|---|---|---|---|
+| 1 | Création d'un ticket standard | Objet créé correctement | SUCCÈS |
+| 2 | Création d'un ticket prioritaire | Objet créé correctement | SUCCÈS |
+| 3 | Vérification des numéros | Numéros 1 et 2 | SUCCÈS |
+| 4 | Vérification des opérations | Retrait et Dépôt | SUCCÈS |
+| 5 | Vérification de l'état initial | EN_ATTENTE | SUCCÈS |
+| 6 | Priorité du ticket standard | 1 | SUCCÈS |
+| 7 | Priorité du ticket prioritaire | 2 | SUCCÈS |
+| 8 | Appel d'un ticket en attente | APPELE | SUCCÈS |
+| 9 | Traitement d'un ticket appelé | TRAITE et true | SUCCÈS |
+| 10 | Traitement sans appel préalable | Refus, false et EN_ATTENTE | SUCCÈS |
+| 11 | Double appel d'un ticket | État conservé : APPELE | SUCCÈS |
+| 12 | Appel d'un ticket déjà traité | État conservé : TRAITE | SUCCÈS |
+| 13 | Double traitement d'un ticket | Refus, false et TRAITE | SUCCÈS |
+| 14 | Polymorphisme avec TicketStandard | Priorité 1 | SUCCÈS |
+| 15 | Polymorphisme avec TicketPrioritaire | Priorité 2 | SUCCÈS |
+| 16 | Utilisation de l'interface avec TicketStandard | Traitement réussi | SUCCÈS |
+| 17 | Utilisation de l'interface avec TicketPrioritaire | Traitement réussi | SUCCÈS |
+
+### Bilan attendu
+
+==============================================
+              BILAN DES TESTS
+==============================================
+Nombre total de tests : 17
+Tests réussis         : 17
+Tests échoués         : 0
+Taux de réussite      : 100,00%
+
+TOUS LES TESTS SONT REUSSIS !
+==============================================
+
+### Conclusion
+
+La campagne de tests couvre les principales fonctionnalités de l'application : création des tickets, gestion des priorités, transitions d'état, refus des opérations non autorisées, héritage, polymorphisme et utilisation de l'interface.
+
