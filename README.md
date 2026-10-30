@@ -154,8 +154,8 @@ GestionTicketBanque/
 │   └── diagramme-uml.jpeg
 │
 └──README.md
-
-## Tests manuels — Jalon 1
+```
+## Tests manuels - Jalon 1
 
 ### Objectif des tests
 
@@ -171,9 +171,9 @@ Les tests du jalon 1 visent à vérifier le fonctionnement des principales fonct
 | 4 | Vérification du polymorphisme avec les deux types de tickets | Priorités 1 et 2 | SUCCÈS |
 | 5 | Utilisation de l'interface GestionTicket | Appel et traitement réussis pour les deux types | SUCCÈS |
 
-### Bilan attendu des tests
+### Bilan des tests
 
-========================================
+=====================================
         BILAN DES TESTS - JALON 1
 ========================================
 Nombre total de tests : 5
@@ -192,6 +192,8 @@ Les cinq scénarios de tests du jalon 1 permettent de vérifier :
 - Le refus du traitement d'un ticket non appelé.
 - Le polymorphisme entre TicketStandard et TicketPrioritaire.
 - L'utilisation de l'interface GestionTicket.
+
+
 
 ## Tests manuels — Jalon 2
 
@@ -221,9 +223,9 @@ Les tests ont pour objectif de vérifier le fonctionnement de l'application, le 
 | 16 | Utilisation de l'interface avec TicketStandard | Traitement réussi | SUCCÈS |
 | 17 | Utilisation de l'interface avec TicketPrioritaire | Traitement réussi | SUCCÈS |
 
-### Bilan attendu
+### Bilan
 
-==============================================
+===========================================
               BILAN DES TESTS
 ==============================================
 Nombre total de tests : 17
