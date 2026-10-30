@@ -1,102 +1,101 @@
+
 public class Main {
 
-    // Affiche un résultat de test
-    public static void afficherResultat(String test, boolean succes) {
-        if (succes) {
-            System.out.println(" SUCCÈS : " + test);
+    private static int totalTests = 0;
+    private static int testsReussis = 0;
+    private static int testsEchoues = 0;
+
+    // Affichage du résultat d'un test
+    public static void tester(String description, boolean condition) {
+        totalTests++;
+
+        if (condition) {
+            testsReussis++;
+            System.out.println("[SUCCÈS] Test " + totalTests + " : " + description);
         } else {
-            System.out.println(" ÉCHEC  : " + test);
+            testsEchoues++;
+            System.out.println("[ÉCHEC] Test " + totalTests + " : " + description);
         }
+    }
+
+    // Affichage d'un titre
+    public static void titre(String texte) {
+        System.out.println();
+        System.out.println(texte);
+    }
+
+    // Affichage du bilan d'un jalon
+    public static void bilanJalon(
+            String jalon, int debutTotal, int debutReussis) {
+
+        int nombreTests = totalTests - debutTotal;
+        int reussis = testsReussis - debutReussis;
+        int echoues = nombreTests - reussis;
+
+        titre("BILAN DU " + jalon);
+
+        System.out.println("Tests effectués : " + nombreTests);
+        System.out.println("Tests réussis   : " + reussis);
+        System.out.println("Tests échoués   : " + echoues);
     }
 
     public static void main(String[] args) {
 
-        System.out.println();
-        
-        System.out.println("       GESTION DE TICKETS D'UNE BANQUE");
-       
+        titre("GESTION DE TICKETS D'UNE BANQUE");
 
-        // 1. SCENARIO NORMAL
-    
-        System.out.println();
-        System.out.println("[1] SCENARIO NORMAL");
-        
+        //                 JALON 1
 
-        TicketStandard ticket1 =  new TicketStandard(1, "Retrait");
+        titre("JALON 1 - TESTS FONDAMENTAUX");
 
-        ticket1.afficherInformations();
+        int debutJalon1 = totalTests;
+        int reussisDebutJalon1 = testsReussis;
+
+        // TEST 1 : SCENARIO NORMAL
+        System.out.println("\n[1] SCENARIO NORMAL");
+
+        TicketStandard ticket1 =
+                new TicketStandard(1, "Retrait");
 
         String etatInitial = ticket1.getEtat();
 
         ticket1.appeler();
-
         String etatApresAppel = ticket1.getEtat();
 
         boolean traitement1 = ticket1.traiter();
-
         String etatFinal = ticket1.getEtat();
 
-        System.out.println("État final : " + etatFinal);
-
-        afficherResultat(
-                "Le ticket suit EN_ATTENTE -> APPELE -> TRAITE",
+        tester("Cycle EN_ATTENTE -> APPELE -> TRAITE",
                 etatInitial.equals("EN_ATTENTE")
-                        && etatApresAppel.equals("APPELE")
-                        && traitement1
-                        && etatFinal.equals("TRAITE")
-        );
+                && etatApresAppel.equals("APPELE")
+                && traitement1
+                && etatFinal.equals("TRAITE"));
 
-        // 2. SCENARIO DE REFUS
-        
-        System.out.println();
-        System.out.println("[2] SCENARIO DE REFUS");
-        
+        // TEST 2 : REFUS DE TRAITEMENT
+        System.out.println("\n[2] REFUS DE TRAITEMENT");
 
-        TicketPrioritaire ticket2 = new TicketPrioritaire(2, "Dépôt");
+        TicketPrioritaire ticket2 =
+                new TicketPrioritaire(2, "Dépôt");
 
-        ticket2.afficherInformations();
-
-        // Tentative de traitement sans appel préalable
         boolean traitement2 = ticket2.traiter();
 
-        System.out.println("Résultat du traitement : " + traitement2);
-        System.out.println("État du ticket : " + ticket2.getEtat());
-
-        afficherResultat(
-                "Le traitement est refusé si le ticket n'est pas appelé",
+        tester("Traitement refusé sans appel préalable",
                 !traitement2
-                        && ticket2.getEtat().equals("EN_ATTENTE")
-        );
+                && ticket2.getEtat().equals("EN_ATTENTE"));
 
-        // 3. CHANGEMENT D'ETAT
-        
-        System.out.println();
-        System.out.println("[3] CHANGEMENT D'ETAT");
-       
+        // TEST 3 : CHANGEMENT D'ETAT
+        System.out.println("\n[3] CHANGEMENT D'ETAT");
 
-        TicketStandard ticket3 = new TicketStandard(3, "Consultation");
-
-        System.out.println("État initial : " + ticket3.getEtat());
+        TicketStandard ticket3 =
+                new TicketStandard(3, "Consultation");
 
         ticket3.appeler();
-
-        System.out.println("Après appel : " + ticket3.getEtat());
-
         ticket3.traiter();
 
-        System.out.println("Après traitement : " + ticket3.getEtat());
+        tester("Changement d'état correct",
+                ticket3.getEtat().equals("TRAITE"));
 
-        afficherResultat(
-                "Les états du ticket changent correctement",
-                ticket3.getEtat().equals("TRAITE")
-        );
-
-// 4. POLYMORPHISME
-        
-
-        System.out.println();
-        System.out.println("[4] POLYMORPHISME");
-        
+        // TEST 4 : POLYMORPHISME
+        System.out.println("\n[4] POLYMORPHISME");
 
         Ticket ticket4 =
                 new TicketStandard(4, "Retrait");
@@ -104,53 +103,143 @@ public class Main {
         Ticket ticket5 =
                 new TicketPrioritaire(5, "Virement");
 
-        int priorite4 = ticket4.calculerPriorite();
-        int priorite5 = ticket5.calculerPriorite();
+        tester("Polymorphisme et priorités",
+                ticket4.calculerPriorite() == 1
+                && ticket5.calculerPriorite() == 2);
 
-        System.out.println(
-                "Ticket n°" + ticket4.getNumero()
-                        + " (TicketStandard) : priorité = "
-                        + priorite4
-        );
+        // TEST 5 : INTERFACE
+        System.out.println("\n[5] UTILISATION DE L'INTERFACE");
 
-        System.out.println(
-                "Ticket n°" + ticket5.getNumero()
-                        + " (TicketPrioritaire) : priorité = "
-                        + priorite5
-        );
+        GestionTicket gestion1 =
+                new TicketStandard(6, "Retrait");
 
-        afficherResultat(
-                "Le polymorphisme fonctionne",
-                priorite4 == 1 && priorite5 == 2
-        );
-
-        // 5. UTILISATION DE L'INTERFACE
-        
-        System.out.println();
-        System.out.println("[5] UTILISATION DE L'INTERFACE");
-        
-
-        GestionTicket gestion1 = new TicketStandard(6, "Retrait");
-
-        GestionTicket gestion2 = new TicketPrioritaire(7, "Dépôt");
+        GestionTicket gestion2 =
+                new TicketPrioritaire(7, "Dépôt");
 
         gestion1.appeler();
-        boolean resultatGestion1 = gestion1.traiter();
-
         gestion2.appeler();
-        boolean resultatGestion2 = gestion2.traiter();
 
-        afficherResultat(
-                "L'interface GestionTicket est correctement utilisée",
-                resultatGestion1 && resultatGestion2
+        boolean resultat1 = gestion1.traiter();
+        boolean resultat2 = gestion2.traiter();
+
+        tester("Utilisation de l'interface GestionTicket",
+                resultat1 && resultat2);
+
+        bilanJalon(
+                "JALON 1",
+                debutJalon1,
+                reussisDebutJalon1
         );
 
-        // FIN
-    
-        System.out.println();
+        //                 JALON 2
         
-        System.out.println("                 TESTS TERMINÉS");
-      
+        titre("JALON 2 - TESTS COMPLEMENTAIRES");
+
+        int debutJalon2 = totalTests;
+        int reussisDebutJalon2 = testsReussis;
+
+        // TEST 6 : CREATION STANDARD
+        TicketStandard standard =
+                new TicketStandard(8, "Retrait");
+
+        tester("Création d'un ticket standard",
+                standard != null);
+
+        // TEST 7 : CREATION PRIORITAIRE
+        TicketPrioritaire prioritaire =
+                new TicketPrioritaire(9, "Dépôt");
+
+        tester("Création d'un ticket prioritaire",
+                prioritaire != null);
+
+        // TEST 8 : NUMEROS
+        tester("Vérification des numéros",
+                standard.getNumero() == 8
+                && prioritaire.getNumero() == 9);
+
+        // TEST 9 : OPERATIONS
+        tester("Vérification des opérations",
+                standard.getOperation().equals("Retrait")
+                && prioritaire.getOperation().equals("Dépôt"));
+
+        // TEST 10 : ETAT INITIAL
+        tester("État initial EN_ATTENTE",
+                standard.getEtat().equals("EN_ATTENTE")
+                && prioritaire.getEtat().equals("EN_ATTENTE"));
+
+        // TEST 11 : PRIORITE STANDARD
+        tester("Priorité standard égale à 1",
+                standard.calculerPriorite() == 1);
+
+        // TEST 12 : PRIORITE PRIORITAIRE
+        tester("Priorité prioritaire égale à 2",
+                prioritaire.calculerPriorite() == 2);
+
+        // TEST 13 : APPEL D'UN TICKET
+        standard.appeler();
+
+        tester("Appel d'un ticket en attente",
+                standard.getEtat().equals("APPELE"));
+
+        // TEST 14 : TRAITEMENT D'UN TICKET
+        boolean traitementStandard = standard.traiter();
+
+        tester("Traitement d'un ticket appelé",
+                traitementStandard
+                && standard.getEtat().equals("TRAITE"));
+
+        // TEST 15 : DOUBLE APPEL
+        TicketStandard ticket10 =
+                new TicketStandard(10, "Virement");
+
+        ticket10.appeler();
+        ticket10.appeler();
+
+        tester("Refus du double appel",
+                ticket10.getEtat().equals("APPELE"));
+
+        // TEST 16 : RAPPEL APRES TRAITEMENT
+        TicketPrioritaire ticket11 =
+                new TicketPrioritaire(11, "Consultation");
+
+        ticket11.appeler();
+        ticket11.traiter();
+        ticket11.appeler();
+
+        tester("Refus d'appel après traitement",
+                ticket11.getEtat().equals("TRAITE"));
+
+        // TEST 17 : DOUBLE TRAITEMENT
+        boolean deuxiemeTraitement = ticket11.traiter();
+
+        tester("Refus du double traitement",
+                !deuxiemeTraitement
+                && ticket11.getEtat().equals("TRAITE"));
+
+        bilanJalon(
+                "JALON 2",
+                debutJalon2,
+                reussisDebutJalon2
+        );
+
+        //              BILAN GENERAL
+
+        titre("BILAN GENERAL DES TESTS");
+
+        System.out.println("Nombre total de tests : " + totalTests);
+        System.out.println("Tests réussis         : " + testsReussis);
+        System.out.println("Tests échoués         : " + testsEchoues);
+
+        double taux = totalTests == 0
+                ? 0
+                : (double) testsReussis / totalTests * 100;
+
+        System.out.printf("Taux de réussite      : %.2f%%%n", taux);
+
+        if (testsEchoues == 0) {
+            System.out.println("TOUS LES TESTS SONT REUSSIS !");
+        } else {
+            System.out.println("CERTAINS TESTS ONT ECHOUE.");
+        }
     }
 }
-       
