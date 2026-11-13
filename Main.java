@@ -221,6 +221,67 @@ public class Main {
                 debutJalon2,
                 reussisDebutJalon2
         );
+        
+        //                 JALON 3
+
+        titre("JALON 3 - GESTION DES COLLECTIONS");
+
+        int debutJalon3 = totalTests;
+        int reussisDebutJalon3 = testsReussis;
+
+        // TEST 18 : CREATION DU GESTIONNAIRE
+        GestionnaireTickets gestionnaire =
+                new GestionnaireTickets();
+
+        tester("Création du gestionnaire et collection vide",
+                gestionnaire.nombreTickets() == 0);
+
+        // TEST 19 : AJOUT D'UN TICKET STANDARD
+        TicketStandard ticketStandard =
+                new TicketStandard(18, "Retrait");
+
+        gestionnaire.ajouterTicket(ticketStandard);
+
+        tester("Ajout d'un ticket standard",
+                gestionnaire.nombreTickets() == 1);
+
+        // TEST 20 : AJOUT D'UN TICKET PRIORITAIRE
+        TicketPrioritaire ticketPrioritaire =
+                new TicketPrioritaire(19, "Dépôt");
+
+        gestionnaire.ajouterTicket(ticketPrioritaire);
+
+        tester("Ajout d'un ticket prioritaire",
+                gestionnaire.nombreTickets() == 2);
+
+        // TEST 21 : AJOUT DE PLUSIEURS TICKETS
+        gestionnaire.ajouterTicket(
+                new TicketStandard(20, "Virement"));
+
+        tester("Gestion de plusieurs tickets",
+                gestionnaire.nombreTickets() == 3);
+
+        // TEST 22 : REFUS D'UN TICKET NULL
+        gestionnaire.ajouterTicket(null);
+
+        tester("Refus de l'ajout d'un ticket null",
+                gestionnaire.nombreTickets() == 3);
+
+        // TEST 23 : VERIFICATION DE LA COLLECTION
+        tester("Conservation des tickets ajoutés",
+                gestionnaire.nombreTickets() == 3);
+
+        // TEST 24 : AFFICHAGE DES TICKETS
+        System.out.println("\nAffichage des tickets du gestionnaire :");
+
+        gestionnaire.afficherTickets();
+
+        bilanJalon(
+                "JALON 3",
+                debutJalon3,
+                reussisDebutJalon3
+        );
+
 
         //              BILAN GENERAL
 
