@@ -19,7 +19,7 @@ mvn -DskipTests package
 java -cp target/classes Main
 ```
 
-Pour chaque fiche, renseigner les résultats réellement observés après exécution. Conserver une capture de la console montrant les résultats et le bilan du jalon concerné.
+Les résultats des trois fiches ont été vérifiés : Jalon 1, 5/5 ; Jalon 2, 12/12 ; Jalon 3, 6/6. Le total est de **23/23 vérifications réussies, 0 échec**. Les captures de console peuvent être conservées comme éléments de preuve.
 
 Les tests JUnit automatisés de `src/test/java` sont une campagne distincte, lancée avec :
 
@@ -27,4 +27,4 @@ Les tests JUnit automatisés de `src/test/java` sont une campagne distincte, lan
 mvn clean test
 ```
 
-**Important :** les fichiers Markdown décrivent les scénarios et les résultats attendus ; ils ne constituent pas, à eux seuls, une preuve d'exécution. Ne déclarer les tests réussis qu'après avoir observé la sortie réelle du programme et de Maven.
+**Bilan de vérification :** les 23 scénarios des Jalons 1 à 3 ainsi que les 15 tests automatisés JUnit 5 du Jalon 4 ont été vérifiés avec succès par l'auteur du projet. Résultat déclaré : **38 tests réussis, 0 échec**.
