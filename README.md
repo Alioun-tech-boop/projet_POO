@@ -142,18 +142,18 @@ Le projet doit respecter les contraintes suivantes :
 Le projet est organisé comme suit :
 
 ```text
-GestionTicketBanque/
-│
-├── src/
-│   ├── Ticket.java
-│   ├── TicketStandard.java
-│   ├── TicketPrioritaire.java
-│   ├── GestionTicket.java
-│   └── Main.java
-├──docs/
-│   └── diagramme-uml.jpeg
-│
-└──README.md
+projet_POO/
+├── GestionTicket.java
+├── Ticket.java
+├── TicketStandard.java
+├── TicketPrioritaire.java
+├── GestionnaireTickets.java
+├── Main.java
+├── diagramme-uml.jpeg
+├── pom.xml
+└── src/test/java/
+    ├── TicketTest.java
+    └── GestionnaireTicketsTest.java
 ```
 ## Tests manuels - Jalon 1
 
@@ -173,15 +173,7 @@ Les tests du jalon 1 visent à vérifier le fonctionnement des principales fonct
 
 ### Bilan des tests
 
-=====================================
-        BILAN DES TESTS - JALON 1
-========================================
-Nombre total de tests : 5
-Tests réussis         : 5
-Tests échoués         : 0
-Taux de réussite      : 100 %
-
-========================================
+Bilan à compléter après exécution manuelle : consigner le nombre de tests réellement effectués, réussis et échoués. Les résultats attendus ci-dessus ne constituent pas, à eux seuls, une preuve d'exécution.
 
 ### Conclusion
 
@@ -225,18 +217,46 @@ Les tests ont pour objectif de vérifier le fonctionnement de l'application, le 
 
 ### Bilan
 
-===========================================
-              BILAN DES TESTS
-==============================================
-Nombre total de tests : 17
-Tests réussis         : 17
-Tests échoués         : 0
-Taux de réussite      : 100,00%
-
-TOUS LES TESTS SONT REUSSIS !
-==============================================
+Bilan à compléter après exécution manuelle : consigner les résultats réellement observés. Ne pas assimiler les résultats attendus à des tests exécutés.
 
 ### Conclusion
 
 La campagne de tests couvre les principales fonctionnalités de l'application : création des tickets, gestion des priorités, transitions d'état, refus des opérations non autorisées, héritage, polymorphisme et utilisation de l'interface.
 
+
+
+## Jalon 4 — robustesse et tests automatisés
+
+### Invariants et validations
+
+- Le numéro d'un ticket doit être strictement positif.
+- L'opération ne peut être ni nulle ni vide ; les espaces extérieurs sont supprimés.
+- Les états sont centralisés dans `Ticket` : `EN_ATTENTE`, `APPELE` et `TRAITE`.
+- Le numéro et l'opération sont immuables après construction.
+- La collection du gestionnaire est initialisée une seule fois et accepte uniquement des tickets non nuls.
+
+### Tests JUnit 5
+
+Les tests automatisés se trouvent dans `src/test/java` et couvrent les créations, les priorités, les transitions d'état, les cas invalides et la collection.
+
+Prérequis : JDK 17 ou supérieur et Maven.
+
+Pour lancer les tests :
+
+```bash
+mvn test
+```
+
+Pour compiler le projet :
+
+```bash
+mvn -DskipTests package
+```
+
+Pour exécuter le programme principal après compilation :
+
+```bash
+java -cp target/classes Main
+```
+
+Les résultats de `mvn test` doivent être conservés comme preuve d'exécution. Les scénarios de tests manuels doivent, eux, être exécutés séparément et consignés avec leurs résultats réellement observés.
