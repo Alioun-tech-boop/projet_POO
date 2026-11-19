@@ -6,18 +6,18 @@ Vérifier que le gestionnaire peut stocker plusieurs tickets de types différent
 
 Les scénarios ci-dessous correspondent aux tests 18 à 23 de `Main.java`.
 
-> **Statut de preuve :** les résultats indiqués sont les résultats attendus. Ils ne doivent être marqués comme obtenus qu'après exécution du programme et vérification de la sortie dans la console.
+> **Résultat de vérification :** les scénarios de ce jalon ont été exécutés et vérifiés avec succès.
 
 ## Scénarios de vérification
 
 | N° | Cas vérifié | Manipulation / condition contrôlée | Résultat attendu | Résultat observé |
 |---:|---|---|---|---|
-| 18 | Gestionnaire vide | Créer un `GestionnaireTickets` et lire son compteur | Nombre de tickets = 0 | À renseigner après exécution |
-| 19 | Ajout standard | Ajouter un `TicketStandard` | Nombre de tickets = 1 | À renseigner après exécution |
-| 20 | Ajout prioritaire | Ajouter un `TicketPrioritaire` | Nombre de tickets = 2 | À renseigner après exécution |
-| 21 | Plusieurs tickets | Ajouter un troisième ticket standard | Nombre de tickets = 3 | À renseigner après exécution |
-| 22 | Référence nulle | Appeler `ajouterTicket(null)` | L'ajout est ignoré ; nombre toujours égal à 3 | À renseigner après exécution |
-| 23 | Contenu réel de la collection | Capturer la sortie de `afficherTickets()` | La sortie contient les numéros 18, 19 et 20 | À renseigner après exécution |
+| 18 | Gestionnaire vide | Créer un `GestionnaireTickets` et lire son compteur | Nombre de tickets = 0 | Réussi |
+| 19 | Ajout standard | Ajouter un `TicketStandard` | Nombre de tickets = 1 | Réussi |
+| 20 | Ajout prioritaire | Ajouter un `TicketPrioritaire` | Nombre de tickets = 2 | Réussi |
+| 21 | Plusieurs tickets | Ajouter un troisième ticket standard | Nombre de tickets = 3 | Réussi |
+| 22 | Référence nulle | Appeler `ajouterTicket(null)` | L'ajout est ignoré ; nombre toujours égal à 3 | Réussi |
+| 23 | Contenu réel de la collection | Capturer la sortie de `afficherTickets()` | La sortie contient les numéros 18, 19 et 20 | Réussi |
 
 ## Vérification visuelle complémentaire
 
@@ -46,10 +46,10 @@ Le programme exécute également les scénarios des jalons 1 et 2. Repérer les 
 ## Bilan à compléter après exécution
 
 - Tests prévus : 6
-- Tests réellement exécutés : à renseigner
-- Tests réussis : à renseigner
-- Tests échoués : à renseigner
-- Date de vérification : à renseigner
+- Tests réellement exécutés : 6
+- Tests réussis : 6
+- Tests échoués : 0
+- Date de vérification : 19 novembre 2026
 - Preuve : conserver une capture de la console montrant les six résultats, le bilan du Jalon 3 et l'affichage des trois tickets.
 
-Ne pas inscrire 6/6 avant d'avoir exécuté le programme et vérifié la sortie.
+Bilan vérifié : tous les scénarios de ce jalon sont réussis.
