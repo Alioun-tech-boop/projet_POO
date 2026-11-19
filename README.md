@@ -1,47 +1,56 @@
-# Gestion de tickets d'une banque
+# Gestion des tickets bancaires
 
-## 1. Présentation
+## Présentation
 
-Ce projet Java 17 modélise la gestion de tickets dans une agence bancaire : création de tickets, appel, traitement, gestion des états et distinction entre tickets standards et prioritaires.
+Ce projet a été réalisé dans le cadre du travail pratique de Programmation Orientée Objet. Il porte sur la gestion des tickets d'attente d'une agence bancaire : création des tickets, appel au guichet, traitement et suivi de leur état.
 
-Il met en œuvre les notions de programmation orientée objet suivantes :
+L'application distingue deux catégories de tickets — standard et prioritaire — tout en conservant un fonctionnement commun. La conception met en pratique les principaux mécanismes de la programmation orientée objet en Java.
 
-- classe abstraite et héritage ;
-- interface ;
-- polymorphisme ;
-- redéfinition de méthodes ;
-- collection générique avec `List<Ticket>` et `ArrayList<Ticket>` ;
-- validation des données et gestion de cas limites.
+## Fonctionnalités
 
-## 2. Fonctionnalités
+- Création de tickets standards et prioritaires.
+- Attribution d'un numéro et d'une opération à chaque ticket.
+- Gestion des états : `EN_ATTENTE`, `APPELE` et `TRAITE`.
+- Contrôle de l'ordre des opérations : un ticket doit être appelé avant d'être traité.
+- Prévention des doubles appels et des doubles traitements.
+- Différenciation des tickets par niveau de priorité.
+- Enregistrement et affichage de plusieurs tickets dans un même gestionnaire.
 
-- Créer des tickets standards et prioritaires.
-- Initialiser chaque ticket à l'état `EN_ATTENTE`.
-- Appeler un ticket : `EN_ATTENTE` → `APPELE`.
-- Traiter un ticket appelé : `APPELE` → `TRAITE`.
-- Refuser le traitement avant l'appel.
-- Refuser les doubles appels et doubles traitements.
-- Attribuer la priorité 1 aux tickets standards et 2 aux tickets prioritaires.
-- Enregistrer et afficher plusieurs tickets dans un gestionnaire.
+## Conception orientée objet
 
-## 3. Architecture du dépôt
+Le programme est organisé autour des classes suivantes :
+
+| Élément | Responsabilité |
+|---|---|
+| `GestionTicket` | Définit les opérations communes `appeler()` et `traiter()`. |
+| `Ticket` | Regroupe les données, les états et les règles communes aux tickets. |
+| `TicketStandard` | Représente un ticket de priorité standard. |
+| `TicketPrioritaire` | Représente un ticket prioritaire. |
+| `GestionnaireTickets` | Centralise la gestion d'une collection de tickets. |
+| `Main` | Lance le programme et présente des vérifications de son comportement. |
+
+La conception utilise l'abstraction, l'héritage, l'encapsulation et le polymorphisme. Le gestionnaire manipule les tickets à travers le type commun `Ticket`, au moyen d'une `List<Ticket>` implémentée par `ArrayList<Ticket>`.
+
+Le diagramme de classes est disponible dans [diagramme-uml.jpeg](diagramme-uml.jpeg).
+
+## Organisation du dépôt
 
 ```text
 projet_POO/
+├── Main.java
 ├── GestionTicket.java
 ├── Ticket.java
 ├── TicketStandard.java
 ├── TicketPrioritaire.java
 ├── GestionnaireTickets.java
-├── Main.java
 ├── diagramme-uml.jpeg
 ├── pom.xml
 ├── README.md
 ├── docs/
+│   ├── PLAN-DE-VERIFICATION-JALONS-1-2-3.md
 │   ├── TESTS-JALON-1.md
 │   ├── TESTS-JALON-2.md
-│   ├── TESTS-JALON-3.md
-│   └── PLAN-DE-VERIFICATION-JALONS-1-2-3.md
+│   └── TESTS-JALON-3.md
 └── src/
     └── test/
         └── java/
@@ -49,63 +58,61 @@ projet_POO/
             └── GestionnaireTicketsTest.java
 ```
 
-## 4. Tests des jalons
+## Vérification du programme
 
-Les scénarios de vérification intégrés à `Main.java` sont numérotés de 1 à 23 :
+Le programme principal contient des scénarios de vérification répartis selon les trois premiers jalons :
 
-| Jalon | Scénarios dans Main.java | Nombre |
+| Partie | Scénarios | Nombre |
 |---|---:|---:|
 | Jalon 1 — comportement fondamental | 1 à 5 | 5 |
 | Jalon 2 — création, états et cas limites | 6 à 17 | 12 |
 | Jalon 3 — gestionnaire et collections | 18 à 23 | 6 |
-| **Total des assertions** | **1 à 23** | **23** |
+| **Total** | **1 à 23** | **23** |
 
-Le contrôle d'affichage du gestionnaire, numéroté comme test 24 dans les commentaires de `Main.java`, est une vérification visuelle complémentaire : il n'est pas comptabilisé dans les 23 assertions.
+Le contrôle d'affichage identifié comme test 24 dans le code constitue une vérification complémentaire et n'entre pas dans ce décompte.
 
-**Attention :** ce tableau indique les scénarios présents dans le code, pas des résultats déjà prouvés. Les tests doivent être exécutés localement et les sorties conservées. Chaque jalon dispose maintenant de son propre document Markdown :
+Les scénarios sont détaillés dans les documents suivants :
 
-- [Tests du Jalon 1 — comportement fondamental](docs/TESTS-JALON-1.md)
-- [Tests du Jalon 2 — création, états et cas limites](docs/TESTS-JALON-2.md)
-- [Tests du Jalon 3 — gestionnaire et collections](docs/TESTS-JALON-3.md)
+- [Tests du Jalon 1](docs/TESTS-JALON-1.md)
+- [Tests du Jalon 2](docs/TESTS-JALON-2.md)
+- [Tests du Jalon 3](docs/TESTS-JALON-3.md)
+- [Plan général de vérification](docs/PLAN-DE-VERIFICATION-JALONS-1-2-3.md)
 
-Le [plan général de vérification](docs/PLAN-DE-VERIFICATION-JALONS-1-2-3.md) récapitule les trois campagnes et la procédure de preuve.
+Le projet comprend également des tests automatisés JUnit 5 dans `src/test/java` :
 
-## 5. Justification de l'interface et de la collection
+- `TicketTest.java couvre les règles de création, de validation et de changement d'état.
+- `GestionnaireTicketsTest.java couvre le comportement de la collection de tickets.
 
-- `GestionTicket` définit le contrat commun des opérations `appeler()` et `traiter()`.
-- `Ticket` implémente ce contrat et centralise les informations et états communs.
-- `TicketStandard` et `TicketPrioritaire` spécialisent `Ticket` et définissent leur priorité.
-- `GestionnaireTickets` stocke les différents types de tickets dans une `List<Ticket>` concrètement créée avec `ArrayList<Ticket>`. Cela permet de gérer une collection de taille variable et de regrouper les deux types grâce au polymorphisme.
-- L'ajout d'une référence `null` est ignoré.
+Les documents de vérification permettent de consigner les observations obtenues pendant l'exécution. Les résultats doivent correspondre aux sorties réellement constatées.
 
-## 6. Maven : rôle et commandes
+## Environnement et outils
 
-Maven est l'outil de construction du projet. Il lit le fichier `pom.xml`, gère la dépendance JUnit, compile le code, lance les tests automatisés et prépare le livrable. Maven ne remplace pas Java : le projet reste écrit en Java 17.
+- Java 17
+- Maven
+- JUnit Jupiter 5
+- Git et GitHub
 
-Depuis la racine du projet :
+Maven est utilisé pour gérer la dépendance de test, compiler les sources et exécuter les tests automatisés. La configuration du projet se trouve dans `pom.xml`.
+
+## Compiler et exécuter
+
+Depuis le répertoire principal du projet :
 
 ```bash
-# Nettoyer, compiler et exécuter les tests JUnit
+# Nettoyer le répertoire de compilation et lancer les tests
 mvn clean test
 
 # Construire le projet sans relancer les tests
 mvn -DskipTests package
 
-# Lancer le programme principal après compilation
+# Exécuter le programme principal après compilation
 java -cp target/classes Main
 ```
 
-Les tests JUnit sont distincts des 23 vérifications exécutées par `Main.java`.
+Les tests JUnit et les vérifications lancées par `Main.java` sont deux mécanismes distincts.
 
-## 7. Jalon 4 — robustesse et tests automatisés
+## Bilan et évolutions possibles
 
-Les tests JUnit 5 sont placés dans `src/test/java` :
+Cette application constitue une base de gestion de tickets bancaires organisée autour de responsabilités clairement séparées. La structure retenue permet de faire évoluer le programme sans concentrer toute la logique dans une seule classe.
 
-- `TicketTest.java` : création, validation, priorités, transitions d'état et cas limites ;
-- `GestionnaireTicketsTest.java` : collection vide, ajout de tickets, rejet de `null` et conservation du nombre d'éléments.
-
-Les validations du modèle comprennent notamment un numéro strictement positif, une opération non nulle et non vide, ainsi que des états limités à `EN_ATTENTE`, `APPELE` et `TRAITE`.
-
-## 8. État des vérifications
-
-Les scénarios et les tests automatisés sont présents dans le dépôt. **Leur réussite doit être confirmée par une exécution locale** avec les commandes ci-dessus. Ne renseigner un bilan « réussi » qu'après avoir vérifié les sorties réelles de Maven et de `Main.java`.
+Parmi les améliorations envisageables figurent la gestion de plusieurs guichets, la persistance des tickets dans une base de données, ainsi qu'une interface utilisateur permettant de suivre les appels et les traitements.
