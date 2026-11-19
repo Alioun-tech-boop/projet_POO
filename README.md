@@ -60,7 +60,7 @@ projet_POO/
 
 ## Vérification du programme
 
-Le programme principal contient des scénarios de vérification répartis selon les trois premiers jalons :
+Les scénarios du programme principal ont été exécutés et vérifiés avec succès. Le bilan constaté est de **23 vérifications réussies sur 23, sans échec**, réparties selon les trois premiers jalons :
 
 | Partie | Scénarios | Nombre |
 |---|---:|---:|
@@ -78,12 +78,12 @@ Les scénarios sont détaillés dans les documents suivants :
 - [Tests du Jalon 3](docs/TESTS-JALON-3.md)
 - [Plan général de vérification](docs/PLAN-DE-VERIFICATION-JALONS-1-2-3.md)
 
-Le projet comprend également des tests automatisés JUnit 5 dans `src/test/java` :
+Le projet comprend également **15 tests automatisés JUnit 5**, exécutés avec succès :
 
 - `TicketTest.java` couvre les règles de création, de validation et de changement d'état.
 - `GestionnaireTicketsTest.java` couvre le comportement de la collection de tickets.
 
-Les documents de vérification permettent de consigner les observations obtenues pendant l'exécution. Les résultats doivent correspondre aux sorties réellement constatées.
+Les résultats des vérifications des Jalons 1 à 3 ont été contrôlés : **23/23 réussis**. Les tests JUnit 5 du Jalon 4 ont également été vérifiés : **15/15 réussis**. Aucun échec n'a été relevé lors de ces vérifications.
 
 ## Environnement et outils
 
@@ -109,7 +109,7 @@ mvn -DskipTests package
 java -cp target/classes Main
 ```
 
-Les tests JUnit et les vérifications lancées par `Main.java` sont deux mécanismes distincts.
+Les tests JUnit et les vérifications lancées par `Main.java` sont deux mécanismes distincts : les premiers couvrent les tests automatisés du Jalon 4, les secondes les 23 scénarios des Jalons 1 à 3.
 
 ## Bilan et évolutions possibles
 
