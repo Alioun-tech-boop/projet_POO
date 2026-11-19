@@ -38,6 +38,9 @@ projet_POO/
 ├── pom.xml
 ├── README.md
 ├── docs/
+│   ├── TESTS-JALON-1.md
+│   ├── TESTS-JALON-2.md
+│   ├── TESTS-JALON-3.md
 │   └── PLAN-DE-VERIFICATION-JALONS-1-2-3.md
 └── src/
     └── test/
@@ -59,7 +62,13 @@ Les scénarios de vérification intégrés à `Main.java` sont numérotés de 1 
 
 Le contrôle d'affichage du gestionnaire, numéroté comme test 24 dans les commentaires de `Main.java`, est une vérification visuelle complémentaire : il n'est pas comptabilisé dans les 23 assertions.
 
-**Attention :** ce tableau indique les scénarios présents dans le code, pas des résultats déjà prouvés. Les tests doivent être exécutés localement et les sorties conservées. Le document détaillé, avec résultats attendus et colonnes à compléter après exécution, se trouve dans [docs/PLAN-DE-VERIFICATION-JALONS-1-2-3.md](docs/PLAN-DE-VERIFICATION-JALONS-1-2-3.md).
+**Attention :** ce tableau indique les scénarios présents dans le code, pas des résultats déjà prouvés. Les tests doivent être exécutés localement et les sorties conservées. Chaque jalon dispose maintenant de son propre document Markdown :
+
+- [Tests du Jalon 1 — comportement fondamental](docs/TESTS-JALON-1.md)
+- [Tests du Jalon 2 — création, états et cas limites](docs/TESTS-JALON-2.md)
+- [Tests du Jalon 3 — gestionnaire et collections](docs/TESTS-JALON-3.md)
+
+Le [plan général de vérification](docs/PLAN-DE-VERIFICATION-JALONS-1-2-3.md) récapitule les trois campagnes et la procédure de preuve.
 
 ## 5. Justification de l'interface et de la collection
 
