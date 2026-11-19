@@ -1,3 +1,7 @@
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
+
 
 public class Main {
 
@@ -267,9 +271,24 @@ public class Main {
         tester("Refus de l'ajout d'un ticket null",
                 gestionnaire.nombreTickets() == 3);
 
-        // TEST 23 : VERIFICATION DE LA COLLECTION
-        tester("Conservation des tickets ajoutés",
-                gestionnaire.nombreTickets() == 3);
+        // TEST 23 : VERIFICATION DU CONTENU REEL DE LA COLLECTION
+        ByteArrayOutputStream sortieCapturee = new ByteArrayOutputStream();
+        PrintStream ancienneSortie = System.out;
+
+        try {
+            System.setOut(new PrintStream(
+                    sortieCapturee, true, StandardCharsets.UTF_8));
+            gestionnaire.afficherTickets();
+        } finally {
+            System.setOut(ancienneSortie);
+        }
+
+        String affichageCapture = sortieCapturee.toString(StandardCharsets.UTF_8);
+
+        tester("Conservation et affichage des trois tickets",
+                affichageCapture.contains("Numéro : 18")
+                && affichageCapture.contains("Numéro : 19")
+                && affichageCapture.contains("Numéro : 20"));
 
         // TEST 24 : AFFICHAGE DES TICKETS
         System.out.println("\nAffichage des tickets du gestionnaire :");
