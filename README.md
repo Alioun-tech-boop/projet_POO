@@ -1,145 +1,30 @@
- Gestion de tickets d'une banque
+# Gestion de tickets d'une banque
 
- 1. Présentation du projet
+## 1. Présentation
 
- 1.1 Intitulé du projet
+Ce projet Java 17 modélise la gestion de tickets dans une agence bancaire : création de tickets, appel, traitement, gestion des états et distinction entre tickets standards et prioritaires.
 
-Gestion de tickets d'une banque
+Il met en œuvre les notions de programmation orientée objet suivantes :
 
- 1.2 Contexte
+- classe abstraite et héritage ;
+- interface ;
+- polymorphisme ;
+- redéfinition de méthodes ;
+- collection générique avec `List<Ticket>` et `ArrayList<Ticket>` ;
+- validation des données et gestion de cas limites.
 
-Dans une agence bancaire, plusieurs clients peuvent attendre pour effectuer différentes opérations : retrait, dépôt, virement, consultation, etc.
+## 2. Fonctionnalités
 
-Afin d'organiser l'accueil des clients et de faciliter le traitement des demandes, le projet consiste à concevoir une application Java permettant de représenter et de gérer différents types de tickets bancaires.
+- Créer des tickets standards et prioritaires.
+- Initialiser chaque ticket à l'état `EN_ATTENTE`.
+- Appeler un ticket : `EN_ATTENTE` → `APPELE`.
+- Traiter un ticket appelé : `APPELE` → `TRAITE`.
+- Refuser le traitement avant l'appel.
+- Refuser les doubles appels et doubles traitements.
+- Attribuer la priorité 1 aux tickets standards et 2 aux tickets prioritaires.
+- Enregistrer et afficher plusieurs tickets dans un gestionnaire.
 
-Le projet est réalisé en Java en utilisant les principaux concepts de la programmation orientée objet (POO), notamment :
-
-- les classes ;
-- l'héritage ;
-- l'abstraction ;
-- les interfaces ;
-- le polymorphisme ;
-- la redéfinition des méthodes ;
-- la gestion des états d'un objet.
-
-
-
- 2. Cahier des charges
-
- 2.1 Objectif général
-
-L'objectif du projet est de développer une petite application permettant de modéliser la gestion des tickets dans une banque.
-
-L'application doit permettre de :
-
-- créer un ticket ;
-- identifier le numéro du ticket ;
-- préciser l'opération demandée ;
-- connaître l'état du ticket ;
-- déterminer sa priorité ;
-- appeler un ticket ;
-- traiter un ticket ;
-- empêcher le traitement d'un ticket qui n'a pas encore été appelé ;
-- représenter plusieurs types de tickets ;
-- démontrer l'utilisation de l'héritage, de l'abstraction, d'une interface et du polymorphisme.
-
-
-
- 2.2 Fonctionnalités attendues
-
-Le système doit permettre les opérations suivantes.
-
- Création d'un ticket
-
-Lorsqu'un ticket est créé, il possède :
-
-- un numéro ;
-- une opération ;
-- un état initial.
-
-L'état initial d'un nouveau ticket est :
-
-`EN_ATTENTE`
-
-
-
- Appel d'un ticket
-
-Un ticket qui est en attente peut être appelé.
-
-Son état passe alors de :
-
-`EN_ATTENTE`
-
-à :
-
-`APPELE`
-
-
-
- Traitement d'un ticket
-
-Un ticket appelé peut être traité.
-
-Son état passe alors de :
-
-`APPELE`
-
-à :
-
-`TRAITE`*
-
- Gestion d'un refus
- 
-
-Le système doit empêcher le traitement d'un ticket qui est encore en attente.
-
-Par exemple :
-
-`EN_ATTENTE → traitement refusé`
-
-La méthode `traiter()` retourne alors `false`.
-
-
-
- Gestion des priorités
-
-Le système distingue deux types de tickets :
-
-- `TicketStandard` ;
-- `TicketPrioritaire`.
-
-Chaque type possède sa propre priorité.
-
-| Type de ticket | Priorité |
-|---|---:|
-| Ticket standard | 1 |
-| Ticket prioritaire | 2 |
-
-
-
- 3. Contraintes techniques
-
-Le projet doit respecter les contraintes suivantes :
-
-- langage de programmation : Java ;
-- programmation orientée objet ;
-- utilisation d'une classe abstraite ;
-- utilisation de deux classes concrètes ;
-- utilisation d'une interface pertinente ;
-- utilisation de l'héritage ;
-- utilisation du polymorphisme ;
-- présence de tests dans `Main.java` ;
-- les noms des fichiers doivent correspondre aux noms des classes ;
-- le projet doit pouvoir être compilé après un nouveau clonage ;
-- une seule version active du code doit être utilisée ;
-- le README et le diagramme UML doivent être cohérents avec le code.
-
-
-
- 4. Architecture du projet
-
-Le projet est organisé comme suit :
+## 3. Architecture du dépôt
 
 ```text
 projet_POO/
@@ -151,112 +36,67 @@ projet_POO/
 ├── Main.java
 ├── diagramme-uml.jpeg
 ├── pom.xml
-└── src/test/java/
-    ├── TicketTest.java
-    └── GestionnaireTicketsTest.java
-```
-## Tests manuels - Jalon 1
-
-### Objectif des tests
-
-Les tests du jalon 1 visent à vérifier le fonctionnement des principales fonctionnalités de l'application de gestion des tickets bancaires, ainsi que l'utilisation des concepts fondamentaux de la programmation orientée objet en Java.
-
-### Tableau des tests
-
-| N° | Test effectué | Résultat attendu | Statut attendu |
-|---|---|---|---|
-| 1 | Scénario normal : appel et traitement d'un ticket standard | EN_ATTENTE → APPELE → TRAITE | SUCCÈS |
-| 2 | Tentative de traitement d'un ticket prioritaire sans appel préalable | Traitement refusé (`false`), état EN_ATTENTE | SUCCÈS |
-| 3 | Vérification des changements d'état d'un ticket | État final TRAITE | SUCCÈS |
-| 4 | Vérification du polymorphisme avec les deux types de tickets | Priorités 1 et 2 | SUCCÈS |
-| 5 | Utilisation de l'interface GestionTicket | Appel et traitement réussis pour les deux types | SUCCÈS |
-
-### Bilan des tests
-
-Bilan à compléter après exécution manuelle : consigner le nombre de tests réellement effectués, réussis et échoués. Les résultats attendus ci-dessus ne constituent pas, à eux seuls, une preuve d'exécution.
-
-### Conclusion
-
-Les cinq scénarios de tests du jalon 1 permettent de vérifier :
-
-- La création et l'initialisation des tickets.
-- Le passage entre les états EN_ATTENTE, APPELE et TRAITE.
-- Le refus du traitement d'un ticket non appelé.
-- Le polymorphisme entre TicketStandard et TicketPrioritaire.
-- L'utilisation de l'interface GestionTicket.
-
-
-
-## Tests manuels — Jalon 2
-
-### Objectif des tests
-
-Les tests ont pour objectif de vérifier le fonctionnement de l'application, le respect des invariants et l'utilisation des concepts de programmation orientée objet : héritage, abstraction, interfaces et polymorphisme.
-
-### Tableau des tests
-
-| N° | Test effectué | Résultat attendu | Statut attendu |
-|---|---|---|---|
-| 1 | Création d'un ticket standard | Objet créé correctement | SUCCÈS |
-| 2 | Création d'un ticket prioritaire | Objet créé correctement | SUCCÈS |
-| 3 | Vérification des numéros | Numéros 1 et 2 | SUCCÈS |
-| 4 | Vérification des opérations | Retrait et Dépôt | SUCCÈS |
-| 5 | Vérification de l'état initial | EN_ATTENTE | SUCCÈS |
-| 6 | Priorité du ticket standard | 1 | SUCCÈS |
-| 7 | Priorité du ticket prioritaire | 2 | SUCCÈS |
-| 8 | Appel d'un ticket en attente | APPELE | SUCCÈS |
-| 9 | Traitement d'un ticket appelé | TRAITE et true | SUCCÈS |
-| 10 | Traitement sans appel préalable | Refus, false et EN_ATTENTE | SUCCÈS |
-| 11 | Double appel d'un ticket | État conservé : APPELE | SUCCÈS |
-| 12 | Appel d'un ticket déjà traité | État conservé : TRAITE | SUCCÈS |
-| 13 | Double traitement d'un ticket | Refus, false et TRAITE | SUCCÈS |
-| 14 | Polymorphisme avec TicketStandard | Priorité 1 | SUCCÈS |
-| 15 | Polymorphisme avec TicketPrioritaire | Priorité 2 | SUCCÈS |
-| 16 | Utilisation de l'interface avec TicketStandard | Traitement réussi | SUCCÈS |
-| 17 | Utilisation de l'interface avec TicketPrioritaire | Traitement réussi | SUCCÈS |
-
-### Bilan
-
-Bilan à compléter après exécution manuelle : consigner les résultats réellement observés. Ne pas assimiler les résultats attendus à des tests exécutés.
-
-### Conclusion
-
-La campagne de tests couvre les principales fonctionnalités de l'application : création des tickets, gestion des priorités, transitions d'état, refus des opérations non autorisées, héritage, polymorphisme et utilisation de l'interface.
-
-
-
-## Jalon 4 — robustesse et tests automatisés
-
-### Invariants et validations
-
-- Le numéro d'un ticket doit être strictement positif.
-- L'opération ne peut être ni nulle ni vide ; les espaces extérieurs sont supprimés.
-- Les états sont centralisés dans `Ticket` : `EN_ATTENTE`, `APPELE` et `TRAITE`.
-- Le numéro et l'opération sont immuables après construction.
-- La collection du gestionnaire est initialisée une seule fois et accepte uniquement des tickets non nuls.
-
-### Tests JUnit 5
-
-Les tests automatisés se trouvent dans `src/test/java` et couvrent les créations, les priorités, les transitions d'état, les cas invalides et la collection.
-
-Prérequis : JDK 17 ou supérieur et Maven.
-
-Pour lancer les tests :
-
-```bash
-mvn test
+├── README.md
+├── docs/
+│   └── PLAN-DE-VERIFICATION-JALONS-1-2-3.md
+└── src/
+    └── test/
+        └── java/
+            ├── TicketTest.java
+            └── GestionnaireTicketsTest.java
 ```
 
-Pour compiler le projet :
+## 4. Tests des jalons
+
+Les scénarios de vérification intégrés à `Main.java` sont numérotés de 1 à 23 :
+
+| Jalon | Scénarios dans Main.java | Nombre |
+|---|---:|---:|
+| Jalon 1 — comportement fondamental | 1 à 5 | 5 |
+| Jalon 2 — création, états et cas limites | 6 à 17 | 12 |
+| Jalon 3 — gestionnaire et collections | 18 à 23 | 6 |
+| **Total des assertions** | **1 à 23** | **23** |
+
+Le contrôle d'affichage du gestionnaire, numéroté comme test 24 dans les commentaires de `Main.java`, est une vérification visuelle complémentaire : il n'est pas comptabilisé dans les 23 assertions.
+
+**Attention :** ce tableau indique les scénarios présents dans le code, pas des résultats déjà prouvés. Les tests doivent être exécutés localement et les sorties conservées. Le document détaillé, avec résultats attendus et colonnes à compléter après exécution, se trouve dans [docs/PLAN-DE-VERIFICATION-JALONS-1-2-3.md](docs/PLAN-DE-VERIFICATION-JALONS-1-2-3.md).
+
+## 5. Justification de l'interface et de la collection
+
+- `GestionTicket` définit le contrat commun des opérations `appeler()` et `traiter()`.
+- `Ticket` implémente ce contrat et centralise les informations et états communs.
+- `TicketStandard` et `TicketPrioritaire` spécialisent `Ticket` et définissent leur priorité.
+- `GestionnaireTickets` stocke les différents types de tickets dans une `List<Ticket>` concrètement créée avec `ArrayList<Ticket>`. Cela permet de gérer une collection de taille variable et de regrouper les deux types grâce au polymorphisme.
+- L'ajout d'une référence `null` est ignoré.
+
+## 6. Maven : rôle et commandes
+
+Maven est l'outil de construction du projet. Il lit le fichier `pom.xml`, gère la dépendance JUnit, compile le code, lance les tests automatisés et prépare le livrable. Maven ne remplace pas Java : le projet reste écrit en Java 17.
+
+Depuis la racine du projet :
 
 ```bash
+# Nettoyer, compiler et exécuter les tests JUnit
+mvn clean test
+
+# Construire le projet sans relancer les tests
 mvn -DskipTests package
-```
 
-Pour exécuter le programme principal après compilation :
-
-```bash
+# Lancer le programme principal après compilation
 java -cp target/classes Main
 ```
 
-Les résultats de `mvn test` doivent être conservés comme preuve d'exécution. Les scénarios de tests manuels doivent, eux, être exécutés séparément et consignés avec leurs résultats réellement observés.
+Les tests JUnit sont distincts des 23 vérifications exécutées par `Main.java`.
+
+## 7. Jalon 4 — robustesse et tests automatisés
+
+Les tests JUnit 5 sont placés dans `src/test/java` :
+
+- `TicketTest.java` : création, validation, priorités, transitions d'état et cas limites ;
+- `GestionnaireTicketsTest.java` : collection vide, ajout de tickets, rejet de `null` et conservation du nombre d'éléments.
+
+Les validations du modèle comprennent notamment un numéro strictement positif, une opération non nulle et non vide, ainsi que des états limités à `EN_ATTENTE`, `APPELE` et `TRAITE`.
+
+## 8. État des vérifications
+
+Les scénarios et les tests automatisés sont présents dans le dépôt. **Leur réussite doit être confirmée par une exécution locale** avec les commandes ci-dessus. Ne renseigner un bilan « réussi » qu'après avoir vérifié les sorties réelles de Maven et de `Main.java`.
