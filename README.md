@@ -80,8 +80,8 @@ Les scénarios sont détaillés dans les documents suivants :
 
 Le projet comprend également des tests automatisés JUnit 5 dans `src/test/java` :
 
-- `TicketTest.java couvre les règles de création, de validation et de changement d'état.
-- `GestionnaireTicketsTest.java couvre le comportement de la collection de tickets.
+- `TicketTest.java` couvre les règles de création, de validation et de changement d'état.
+- `GestionnaireTicketsTest.java` couvre le comportement de la collection de tickets.
 
 Les documents de vérification permettent de consigner les observations obtenues pendant l'exécution. Les résultats doivent correspondre aux sorties réellement constatées.
 
