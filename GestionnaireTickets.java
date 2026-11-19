@@ -1,13 +1,8 @@
-
 import java.util.ArrayList;
+import java.util.List;
 
 public class GestionnaireTickets {
-
-    private ArrayList<Ticket> tickets;
-
-    public GestionnaireTickets() {
-        tickets = new ArrayList<>();
-    }
+    private final List<Ticket> tickets = new ArrayList<>();
 
     public void ajouterTicket(Ticket ticket) {
         if (ticket != null) {
