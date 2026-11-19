@@ -40,11 +40,11 @@ Ce document décrit les scénarios présents dans `Main.java`. L'étudiant lance
 | 20 | Ajout d'un ticket prioritaire | Nombre de tickets = 2 | À renseigner |
 | 21 | Ajout d'un troisième ticket | Nombre de tickets = 3 | À renseigner |
 | 22 | Tentative d'ajout de null | L'élément null est ignoré ; nombre toujours égal à 3 | À renseigner |
-| 23 | Vérification du contenu par le compteur | Les trois tickets ajoutés sont comptabilisés | À renseigner |
+| 23 | Vérification du contenu réellement affiché | La sortie contient les numéros 18, 19 et 20 | À renseigner |
 
 ### Vérification visuelle complémentaire (test 24)
 
-Après les assertions 18 à 23, `Main.java` appelle `gestionnaire.afficherTickets()`. Vérifier dans la console que trois tickets sont affichés, avec leur numéro, leur opération, leur état et leur priorité. Ce contrôle visuel est complémentaire : il n'est pas inclus dans le compteur des 23 assertions.
+Le test 23 capture la sortie de `afficherTickets()` et vérifie que les numéros 18, 19 et 20 sont présents. Ensuite, `Main.java` appelle de nouveau `gestionnaire.afficherTickets()` pour montrer les trois tickets dans la console, avec leur numéro, leur opération, leur état et leur priorité. Ce second affichage est un contrôle visuel complémentaire : il n'est pas inclus dans le compteur des 23 assertions.
 
 ### Justification de la collection et de l'interface
 
