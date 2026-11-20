@@ -1,5 +1,8 @@
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 
 class TicketTest {
     @Test
@@ -85,5 +88,27 @@ class TicketTest {
         prioritaire.appeler();
         assertTrue(standard.traiter());
         assertTrue(prioritaire.traiter());
+    }
+
+    @Test
+    void afficherInformationsExposeLesDonneesDuTicket() {
+        TicketStandard ticket = new TicketStandard(8, "Virement");
+        ByteArrayOutputStream sortie = new ByteArrayOutputStream();
+        PrintStream sortieOriginale = System.out;
+
+        try {
+            System.setOut(new PrintStream(sortie, true, StandardCharsets.UTF_8));
+            ticket.afficherInformations();
+        } finally {
+            System.setOut(sortieOriginale);
+        }
+
+        String affichage = sortie.toString(StandardCharsets.UTF_8);
+        assertAll(
+                () -> assertTrue(affichage.contains("Numéro : 8")),
+                () -> assertTrue(affichage.contains("Opération : Virement")),
+                () -> assertTrue(affichage.contains("État : EN_ATTENTE")),
+                () -> assertTrue(affichage.contains("Priorité : 1"))
+        );
     }
 }
